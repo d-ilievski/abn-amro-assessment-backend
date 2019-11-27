@@ -3,7 +3,6 @@ package com.daniel.food;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,16 +28,11 @@ public class Recipe implements Serializable {
 	private String name;
 	private boolean isVegetarian;
 	private int servings;
-		
-	@Column(nullable = true)
+	
 	private String instructions;
-	@Column(nullable = true)
 	private boolean hasImage;
-	@Column(nullable = true)
 	private Date createdOn;
-	@Column(nullable = true)
 	private Date updatedOn;
-	@Column(nullable = true)
 	private String ingredients;
 	
 }
