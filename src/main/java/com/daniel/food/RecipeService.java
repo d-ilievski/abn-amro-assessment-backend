@@ -1,18 +1,17 @@
 package com.daniel.food;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeService {
 
-	@Autowired
-	private RecipeRepository recipeRepository;
+	private final RecipeRepository recipeRepository;
 	
-	@Autowired
-	private ImagesRestController imagesRestController;
+	private final ImageManagementService imageManagementService;
 	
 	public Recipe save(Recipe recipe) {
 		return recipeRepository.save(recipe);
@@ -20,11 +19,11 @@ public class RecipeService {
 	
 	public boolean delete(long id) {
 		
-		Recipe r = findById(id);
+		Recipe recipe = findById(id);
 		
-		if(r != null) {
-			if(r.isHasImage())
-				imagesRestController.remove(Long.toString(id) + ".jpg");
+		if(recipe != null) {
+			if(recipe.isHasImage())
+				imageManagementService.remove(id + ".jpg");
 			recipeRepository.deleteById(id);
 			return true;
 		}
